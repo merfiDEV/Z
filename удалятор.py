@@ -1,5 +1,6 @@
 import os
-print("сделано By merfiDEV/Maked by MerfiDEV")
+print("\033[36mсделано By merfiDEV\033[0m")
+print("\033[36mMaked by MerfiDEV\033[0m")
 def find_file(file_name, search_directory):
     for root, dirs, files in os.walk(search_directory):
         if file_name in files:
@@ -36,3 +37,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
