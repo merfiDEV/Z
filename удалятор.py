@@ -1,5 +1,5 @@
 import os
-
+print("сделано By merfiDEV/Maked by MerfiDEV")
 def find_file(file_name, search_directory):
     for root, dirs, files in os.walk(search_directory):
         if file_name in files:
