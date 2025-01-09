@@ -1,6 +1,8 @@
 import os
-print("\033[36mсделано By merfiDEV\033[0m")
+
+print("\033[36mСделано By MerfiDEV\033[0m")
 print("\033[36mMaked by MerfiDEV\033[0m")
+
 def find_file(file_name, search_directory):
     for root, dirs, files in os.walk(search_directory):
         if file_name in files:
@@ -15,26 +17,27 @@ def delete_file(file_path):
         print(f"Ошибка при удалении файла: {e}")
 
 def main():
-    file_name = input("Введите название файла для поиска: ")
     search_directory = '/storage/emulated/0'
+    
+    while True:
+        file_name = input("Введите название файла для поиска: ")
+        file_path = find_file(file_name, search_directory)
 
-    file_path = find_file(file_name, search_directory)
+        if file_path:
+            print(f"Файл найден по пути: {file_path}")
+            choice = input("Вы хотите удалить этот файл? (1 - удалить, 0 - отменить): ")
 
-    if file_path:
-        print(f"Файл найден по пути: {file_path}")
-        choice = input("Вы хотите удалить этот файл? (1 - удалить, 0 - отменить): ")
-
-        if choice == '1':
-            confirm = input("Вы уверены, что хотите удалить этот файл? (1 - подтвердить, 0 - отменить): ")
-            if confirm == '1':
-                delete_file(file_path)
+            if choice == '1':
+                confirm = input("Вы уверены, что хотите удалить этот файл? (1 - подтвердить, 0 - отменить): ")
+                if confirm == '1':
+                    delete_file(file_path)
+                else:
+                    print("Удаление отменено.")
             else:
                 print("Удаление отменено.")
+            break  # Завершаем цикл после успешного поиска
         else:
-            print("Удаление отменено.")
-    else:
-        print("Файл не найден.")
+            print("Файл не найден. Попробуйте снова.")
 
 if __name__ == "__main__":
     main()
-    
