@@ -1,6 +1,6 @@
 import os
 import requests
-
+# version=2
 def download_and_execute_script():
     url = "https://raw.githubusercontent.com/merfiDEV/Chyrka/main/sh.sh"
     save_path = "/storage/emulated/0/sh.sh"
