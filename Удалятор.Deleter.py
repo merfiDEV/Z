@@ -1,6 +1,6 @@
 import os
-
-print("\033[36mСделано By MerfiDEV/Maked by MerfiDEV\033[0m")
+print("\033[34mSuccefuly started\033[0m")
+print("\033[32mСделано By MerfiDEV/Maked by MerfiDEV\033[0m")
 
 def find_files(partial_name, search_directory):
     matching_files = []
