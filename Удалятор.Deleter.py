@@ -1,13 +1,14 @@
 import os
 
-print("\033[36mСделано By MerfiDEV\033[0m")
-print("\033[36mMaked by MerfiDEV\033[0m")
+print("\033[36mСделано By MerfiDEV/Maked by MerfiDEV\033[0m")
 
-def find_file(file_name, search_directory):
+def find_files(partial_name, search_directory):
+    matching_files = []
     for root, dirs, files in os.walk(search_directory):
-        if file_name in files:
-            return os.path.join(root, file_name)
-    return None
+        for file in files:
+            if partial_name in file:
+                matching_files.append(os.path.join(root, file))
+    return matching_files
 
 def delete_file(file_path):
     try:
@@ -20,24 +21,34 @@ def main():
     search_directory = '/storage/emulated/0'
     
     while True:
-        file_name = input("Введите название файла для поиска: ")
-        file_path = find_file(file_name, search_directory)
+        partial_name = input("Введите часть, или полное имя файла для поиска: ")
+        matching_files = find_files(partial_name, search_directory)
 
-        if file_path:
-            print(f"Файл найден по пути: {file_path}")
-            choice = input("Вы хотите удалить этот файл? (1 - удалить, 0 - отменить): ")
+        if matching_files:
+            print("Найдены файлы:")
+            for i, file_path in enumerate(matching_files, 1):
+                print(f"{i}: {file_path}")
+            
+            choice = input("Введите номер файла для удаления или 0 для отмены: ")
 
-            if choice == '1':
-                confirm = input("Вы уверены, что хотите удалить этот файл? (1 - подтвердить, 0 - отменить): ")
-                if confirm == '1':
-                    delete_file(file_path)
-                else:
+            if choice.isdigit():
+                choice = int(choice)
+                if 1 <= choice <= len(matching_files):
+                    selected_file = matching_files[choice - 1]
+                    confirm = input(f"Вы уверены, что хотите удалить {selected_file}? (1 - подтвердить, 0 - отменить): ")
+                    if confirm == '1':
+                        delete_file(selected_file)
+                    else:
+                        print("Удаление отменено.")
+                elif choice == 0:
                     print("Удаление отменено.")
+                else:
+                    print("Некорректный выбор.")
             else:
-                print("Удаление отменено.")
-            break  # Завершаем цикл после успешного поиска
+                print("Некорректный ввод.")
+            break
         else:
-            print("Файл не найден. Попробуйте снова.")
+            print("Файлы не найдены. Попробуйте снова.")
 
 if __name__ == "__main__":
     main()
