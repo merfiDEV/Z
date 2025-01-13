@@ -3,7 +3,7 @@ import requests
 
 file_name = "Удалятор.Deleter.py"
 download_url = "https://raw.githubusercontent.com/merfiDEV/Z/main/Удалятор.Deleter.py"
-save_path = f"/storage/emulated/0/{file_name}"
+save_path = f"/storage/emulated/0/merfiDEV/{file_name}"  # Изменено на /merfiDEV/
 
 languages = {
     1: {
